@@ -24,7 +24,7 @@
       font-size: 2rem;
       font-weight: bold;
       padding: 1rem 2rem;
-      margin: 1rem;
+      margin: 1rem 0;
       cursor: pointer;
       border: none;
       border-radius: 8px;
@@ -32,11 +32,11 @@
       max-width: 300px;
     }
     .plain {
-      background-color: #007a00;
+      background-color: #00c853;
       color: #ffffff;
     }
     .not {
-      background-color: #a30000;
+      background-color: #d50000;
       color: #ffffff;
     }
     .result-screen {
@@ -65,7 +65,7 @@
 </head>
 <body>
   <div id="voteScreen">
-    <h1 id="title">Is this Plain Language?</h1>
+    <h1 id="title">Is this plain language?</h1>
     <button class="button plain" id="plainBtn">Plain Language</button>
     <button class="button not" id="notBtn">Not Plain Language</button>
   </div>
@@ -81,11 +81,11 @@
     const resultEl = document.getElementById('result');
 
     document.getElementById('plainBtn').addEventListener('click', function () {
-      showVote('✅ It is plain language', '#007a00');
+      showVote('✅ It is plain language', '#00c853');
     });
 
     document.getElementById('notBtn').addEventListener('click', function () {
-      showVote('❌ Not plain language', '#a30000');
+      showVote('❌ Not plain language', '#d50000');
     });
 
     function showVote(message, bgColor) {
