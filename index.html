@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plain Language Vote</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+    .button {
+      font-size: 2rem;
+      padding: 1rem 2rem;
+      margin: 1rem;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      width: 80vw;
+      max-width: 300px;
+    }
+    .plain { background-color: #4caf50; color: white; }
+    .not { background-color: #f44336; color: white; }
+    .result {
+      font-size: 4rem;
+      display: none;
+      margin-top: 2rem;
+    }
+    .reset {
+      font-size: 1.5rem;
+      margin-top: 1rem;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>Is this Plain Language?</h1>
+  <button class="button plain" onclick="vote('✅ It is plain language')">Plain Language</button>
+  <button class="button not" onclick="vote('❌ Not plain language')">Not Plain Language</button>
+
+  <div class="result" id="result"></div>
+  <div class="reset" id="reset" style="display: none;">Tap anywhere to vote again</div>
+
+  <script>
+    function vote(message) {
+      document.getElementById('result').textContent = message;
+      document.getElementById('result').style.display = 'block';
+      document.getElementById('reset').style.display = 'block';
+      document.querySelectorAll('.button').forEach(btn => btn.style.display = 'none');
+    }
+
+    document.body.addEventListener('click', function () {
+      document.getElementById('result').style.display = 'none';
+      document.getElementById('reset').style.display = 'none';
+      document.querySelectorAll('.button').forEach(btn => btn.style.display = 'inline-block');
+    }, { once: true });
+  </script>
+</body>
+</html>
