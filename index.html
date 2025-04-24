@@ -37,30 +37,44 @@
       font-size: 1.5rem;
       margin-top: 1rem;
       color: #333;
+      display: none;
     }
   </style>
 </head>
 <body>
-  <h1>Is this Plain Language?</h1>
-  <button class="button plain" onclick="vote('✅ It is plain language')">Plain Language</button>
-  <button class="button not" onclick="vote('❌ Not plain language')">Not Plain Language</button>
+  <h1 id="title">Is this Plain Language?</h1>
+  <button class="button plain" id="plainBtn">Plain Language</button>
+  <button class="button not" id="notBtn">Not Plain Language</button>
 
   <div class="result" id="result"></div>
-  <div class="reset" id="reset" style="display: none;">Tap anywhere to vote again</div>
+  <div class="reset" id="reset">Tap anywhere to vote again</div>
 
   <script>
-    function vote(message) {
-      document.getElementById('result').textContent = message;
-      document.getElementById('result').style.display = 'block';
-      document.getElementById('reset').style.display = 'block';
-      document.querySelectorAll('.button').forEach(btn => btn.style.display = 'none');
+    const resultEl = document.getElementById('result');
+    const resetEl = document.getElementById('reset');
+    const buttons = document.querySelectorAll('.button');
+    const title = document.getElementById('title');
+
+    function showVote(message) {
+      resultEl.textContent = message;
+      resultEl.style.display = 'block';
+      resetEl.style.display = 'block';
+      buttons.forEach(btn => btn.style.display = 'none');
+      title.style.display = 'none';
+
+      // Set up reset handler only once per vote
+      document.body.addEventListener('click', reset, { once: true });
     }
 
-    document.body.addEventListener('click', function () {
-      document.getElementById('result').style.display = 'none';
-      document.getElementById('reset').style.display = 'none';
-      document.querySelectorAll('.button').forEach(btn => btn.style.display = 'inline-block');
-    }, { once: true });
+    function reset() {
+      resultEl.style.display = 'none';
+      resetEl.style.display = 'none';
+      title.style.display = 'block';
+      buttons.forEach(btn => btn.style.display = 'inline-block');
+    }
+
+    document.getElementById('plainBtn').addEventListener('click', () => showVote('✅ It is plain language'));
+    document.getElementById('notBtn').addEventListener('click', () => showVote('❌ Not plain language'));
   </script>
 </body>
 </html>
