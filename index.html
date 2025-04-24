@@ -14,11 +14,14 @@
     }
     body {
       background-color: #f4f4f4;
+      text-align: center;
+    }
+    #voteScreen {
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
-      text-align: center;
+      height: 100vh;
     }
     .button {
       font-size: 2rem;
@@ -32,7 +35,7 @@
       max-width: 300px;
     }
     .plain {
-      background-color: #00c853;
+      background-color: #30873D;
       color: #ffffff;
     }
     .not {
@@ -81,7 +84,7 @@
     const resultEl = document.getElementById('result');
 
     document.getElementById('plainBtn').addEventListener('click', function () {
-      showVote('✅ It is plain language', '#00c853');
+      showVote('✅ It is plain language', '#30873D');
     });
 
     document.getElementById('notBtn').addEventListener('click', function () {
