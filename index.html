@@ -18,6 +18,7 @@
     }
     .button {
       font-size: 2rem;
+      font-weight: bold;
       padding: 1rem 2rem;
       margin: 1rem;
       cursor: pointer;
@@ -26,18 +27,31 @@
       width: 80vw;
       max-width: 300px;
     }
-    .plain { background-color: #4caf50; color: white; }
-    .not { background-color: #f44336; color: white; }
-    .result {
-      font-size: 4rem;
+    .plain {
+      background-color: #007a00;
+      color: #ffffff;
+    }
+    .not {
+      background-color: #a30000;
+      color: #ffffff;
+    }
+    .result-screen {
       display: none;
-      margin-top: 2rem;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100vw;
+      color: #ffffff;
+    }
+    .result-message {
+      font-size: 4rem;
+      font-weight: bold;
     }
     .reset {
       font-size: 1.5rem;
       margin-top: 1rem;
-      color: #333;
-      display: none;
+      color: #ffffff;
     }
   </style>
 </head>
@@ -48,8 +62,8 @@
     <button class="button not" id="notBtn">Not Plain Language</button>
   </div>
 
-  <div class="result" id="resultScreen" style="display:none;">
-    <div id="result"></div>
+  <div id="resultScreen" class="result-screen">
+    <div id="result" class="result-message"></div>
     <div class="reset">Tap anywhere to vote again</div>
   </div>
 
@@ -59,15 +73,16 @@
     const resultEl = document.getElementById('result');
 
     document.getElementById('plainBtn').addEventListener('click', function () {
-      showVote('✅ It is plain language');
+      showVote('✅ It is plain language', '#007a00');
     });
 
     document.getElementById('notBtn').addEventListener('click', function () {
-      showVote('❌ Not plain language');
+      showVote('❌ Not plain language', '#a30000');
     });
 
-    function showVote(message) {
+    function showVote(message, bgColor) {
       resultEl.textContent = message;
+      resultScreen.style.backgroundColor = bgColor;
       voteScreen.style.display = 'none';
       resultScreen.style.display = 'flex';
     }
