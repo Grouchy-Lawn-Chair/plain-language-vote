@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+\<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -61,9 +61,6 @@
       resetEl.style.display = 'block';
       buttons.forEach(btn => btn.style.display = 'none');
       title.style.display = 'none';
-
-      // Set up reset handler only once per vote
-      document.body.addEventListener('click', reset, { once: true });
     }
 
     function reset() {
@@ -73,8 +70,21 @@
       buttons.forEach(btn => btn.style.display = 'inline-block');
     }
 
-    document.getElementById('plainBtn').addEventListener('click', () => showVote('✅ It is plain language'));
-    document.getElementById('notBtn').addEventListener('click', () => showVote('❌ Not plain language'));
+    document.getElementById('plainBtn').addEventListener('click', function (e) {
+      e.stopPropagation();
+      showVote('✅ It is plain language');
+    });
+
+    document.getElementById('notBtn').addEventListener('click', function (e) {
+      e.stopPropagation();
+      showVote('❌ Not plain language');
+    });
+
+    document.body.addEventListener('click', function () {
+      if (resetEl.style.display === 'block') {
+        reset();
+      }
+    });
   </script>
 </body>
 </html>
