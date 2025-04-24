@@ -1,4 +1,4 @@
-\<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -42,48 +42,39 @@
   </style>
 </head>
 <body>
-  <h1 id="title">Is this Plain Language?</h1>
-  <button class="button plain" id="plainBtn">Plain Language</button>
-  <button class="button not" id="notBtn">Not Plain Language</button>
+  <div id="voteScreen">
+    <h1 id="title">Is this Plain Language?</h1>
+    <button class="button plain" id="plainBtn">Plain Language</button>
+    <button class="button not" id="notBtn">Not Plain Language</button>
+  </div>
 
-  <div class="result" id="result"></div>
-  <div class="reset" id="reset">Tap anywhere to vote again</div>
+  <div class="result" id="resultScreen" style="display:none;">
+    <div id="result"></div>
+    <div class="reset">Tap anywhere to vote again</div>
+  </div>
 
   <script>
+    const voteScreen = document.getElementById('voteScreen');
+    const resultScreen = document.getElementById('resultScreen');
     const resultEl = document.getElementById('result');
-    const resetEl = document.getElementById('reset');
-    const buttons = document.querySelectorAll('.button');
-    const title = document.getElementById('title');
 
-    function showVote(message) {
-      resultEl.textContent = message;
-      resultEl.style.display = 'block';
-      resetEl.style.display = 'block';
-      buttons.forEach(btn => btn.style.display = 'none');
-      title.style.display = 'none';
-    }
-
-    function reset() {
-      resultEl.style.display = 'none';
-      resetEl.style.display = 'none';
-      title.style.display = 'block';
-      buttons.forEach(btn => btn.style.display = 'inline-block');
-    }
-
-    document.getElementById('plainBtn').addEventListener('click', function (e) {
-      e.stopPropagation();
+    document.getElementById('plainBtn').addEventListener('click', function () {
       showVote('✅ It is plain language');
     });
 
-    document.getElementById('notBtn').addEventListener('click', function (e) {
-      e.stopPropagation();
+    document.getElementById('notBtn').addEventListener('click', function () {
       showVote('❌ Not plain language');
     });
 
-    document.body.addEventListener('click', function () {
-      if (resetEl.style.display === 'block') {
-        reset();
-      }
+    function showVote(message) {
+      resultEl.textContent = message;
+      voteScreen.style.display = 'none';
+      resultScreen.style.display = 'flex';
+    }
+
+    resultScreen.addEventListener('click', function () {
+      voteScreen.style.display = 'flex';
+      resultScreen.style.display = 'none';
     });
   </script>
 </body>
